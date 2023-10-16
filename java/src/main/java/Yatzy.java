@@ -1,9 +1,6 @@
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class Yatzy {
 
@@ -70,26 +67,21 @@ public class Yatzy {
     }
 
     public static int threeOfAKind(Roll roll) {
-
-        return roll.sidesFrequency().entrySet().stream()
-            .filter(e -> e.getValue() >= 3 )
-            .map(Map.Entry::getKey)
-            .mapToInt(i -> i * 3).sum();
-
+        int sideNumber = 3;
+        return scoreDiceOfAkindRule(roll, sideNumber);
     }
 
-    public static int fourOfAKind(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies;
-        tallies = new int[6];
-        tallies[d1 - 1]++;
-        tallies[d2 - 1]++;
-        tallies[d3 - 1]++;
-        tallies[d4 - 1]++;
-        tallies[d5 - 1]++;
-        for (int i = 0; i < 6; i++)
-            if (tallies[i] >= 4)
-                return (i + 1) * 4;
-        return 0;
+    public static int fourOfAKind(Roll roll) {
+        int sideNumber = 4;
+        return scoreDiceOfAkindRule(roll, sideNumber);
+    }
+
+    private static int scoreDiceOfAkindRule(Roll roll, int die) {
+        return roll.sidesFrequency().entrySet().stream()
+            .filter(e -> e.getValue() >= die)
+            .map(Map.Entry::getKey)
+            .mapToInt(i -> i * die)
+            .sum();
     }
 
     public static int smallStraight(int d1, int d2, int d3, int d4, int d5) {
