@@ -24,4 +24,10 @@ public class Roll {
             Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
+    public boolean hasTwoPairs() {
+        return sidesFrequency().entrySet().stream()
+            .filter(e -> e.getValue() >= 2)
+            .count() == 2;
+    }
+
 }

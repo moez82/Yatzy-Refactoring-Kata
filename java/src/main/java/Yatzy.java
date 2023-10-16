@@ -55,25 +55,21 @@ public class Yatzy {
             .map(e -> e.getKey() * 2).orElse(0);
     }
 
-    public static int twoPairs(int d1, int d2, int d3, int d4, int d5) {
-        int[] counts = new int[6];
-        counts[d1 - 1]++;
-        counts[d2 - 1]++;
-        counts[d3 - 1]++;
-        counts[d4 - 1]++;
-        counts[d5 - 1]++;
-        int n = 0;
-        int score = 0;
-        for (int i = 0; i < 6; i += 1)
-            if (counts[6 - i - 1] >= 2) {
-                n++;
-                score += (6 - i);
-            }
-        if (n == 2)
-            return score * 2;
-        else
-            return 0;
+    public static int twoPairs(Roll roll) {
+
+        Map<Integer, Long> frequency = roll.sidesFrequency();
+
+        if (roll.hasTwoPairs()) {
+            return frequency.entrySet().stream()
+                .filter(e -> e.getValue() >= 2)
+                .mapToInt(Map.Entry::getKey).sum() * 2;
+        }
+
+        return 0;
+
     }
+
+
 
     public static int fourOfAKind(int d1, int d2, int d3, int d4, int d5) {
         int[] tallies;
