@@ -6,6 +6,7 @@ public class Yatzy {
 
     public static final int TOTAL_DICE_NUMBER = 5;
     public static final int SMALL_STRAIGHT_SCORE = 15;
+    public static final int LARGE_STRAIGHT_SCORE = 20;
 
     public static int chance(Roll roll) {
         return Arrays.stream(roll.dice()).sum();
@@ -95,20 +96,11 @@ public class Yatzy {
         return 0;
     }
 
-    public static int largeStraight(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies;
-        tallies = new int[6];
-        tallies[d1 - 1] += 1;
-        tallies[d2 - 1] += 1;
-        tallies[d3 - 1] += 1;
-        tallies[d4 - 1] += 1;
-        tallies[d5 - 1] += 1;
-        if (tallies[1] == 1 &&
-            tallies[2] == 1 &&
-            tallies[3] == 1 &&
-            tallies[4] == 1
-            && tallies[5] == 1)
-            return 20;
+    public static int largeStraight(Roll roll) {
+        if (roll.sidesFrequency().entrySet().size() == TOTAL_DICE_NUMBER &&
+            roll.sidesFrequency().keySet().stream().mapToInt(v -> v).sum() == LARGE_STRAIGHT_SCORE) {
+            return LARGE_STRAIGHT_SCORE;
+        }
         return 0;
     }
 
