@@ -69,7 +69,14 @@ public class Yatzy {
 
     }
 
+    public static int threeOfAKind(Roll roll) {
 
+        return roll.sidesFrequency().entrySet().stream()
+            .filter(e -> e.getValue() >= 3 )
+            .map(Map.Entry::getKey)
+            .mapToInt(i -> i * 3).sum();
+
+    }
 
     public static int fourOfAKind(int d1, int d2, int d3, int d4, int d5) {
         int[] tallies;
@@ -82,20 +89,6 @@ public class Yatzy {
         for (int i = 0; i < 6; i++)
             if (tallies[i] >= 4)
                 return (i + 1) * 4;
-        return 0;
-    }
-
-    public static int threeOfAKind(int d1, int d2, int d3, int d4, int d5) {
-        int[] t;
-        t = new int[6];
-        t[d1 - 1]++;
-        t[d2 - 1]++;
-        t[d3 - 1]++;
-        t[d4 - 1]++;
-        t[d5 - 1]++;
-        for (int i = 0; i < 6; i++)
-            if (t[i] >= 3)
-                return (i + 1) * 3;
         return 0;
     }
 
