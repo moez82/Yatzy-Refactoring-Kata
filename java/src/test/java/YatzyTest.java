@@ -6,8 +6,8 @@ public class YatzyTest {
 
     @Test
     public void chance() {
-        assertEquals(15, Yatzy.chance(2, 3, 4, 5, 1));
-        assertEquals(16, Yatzy.chance(3, 3, 4, 5, 1));
+        assertEquals(15, Yatzy.chance(new Dice(2, 3, 4, 5, 1)));
+        assertEquals(16, Yatzy.chance(new Dice(3, 3, 4, 5, 1)));
     }
 
     @Test
