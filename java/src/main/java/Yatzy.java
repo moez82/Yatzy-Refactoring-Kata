@@ -1,4 +1,7 @@
 import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Yatzy {
 
@@ -13,25 +16,16 @@ public class Yatzy {
         dice[4] = d5;
     }
 
-    public static int chance(Dice dice) {
-        return Arrays.stream(dice.dice()).sum();
+    public static int chance(Roll roll) {
+        return Arrays.stream(roll.dice()).sum();
     }
 
-    public static int yatzy(Dice dice) {
+    public static int yatzy(Roll roll) {
 
-        int[] counts = new int[6];
+        Map<Integer, Long> map = Arrays.stream(roll.dice()).boxed().collect(
+            Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        for (int die : dice.dice()) {
-            counts[die - 1]++;
-        }
-
-        for (int i = 0; i != 6; i++) {
-            if (counts[i] == 5) {
-                return 50;
-            }
-        }
-
-        return 0;
+        return map.values().stream().anyMatch(i -> i == 5) ? 50 : 0;
     }
 
     public static int ones(int d1, int d2, int d3, int d4, int d5) {

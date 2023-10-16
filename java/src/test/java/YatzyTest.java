@@ -6,15 +6,15 @@ public class YatzyTest {
 
     @Test
     public void chance() {
-        assertEquals(15, Yatzy.chance(new Dice(2, 3, 4, 5, 1)));
-        assertEquals(16, Yatzy.chance(new Dice(3, 3, 4, 5, 1)));
+        assertEquals(15, Yatzy.chance(new Roll(2, 3, 4, 5, 1)));
+        assertEquals(16, Yatzy.chance(new Roll(3, 3, 4, 5, 1)));
     }
 
     @Test
     public void yatzy() {
-        assertEquals(50, Yatzy.yatzy(new Dice(4, 4, 4, 4, 4)));
-        assertEquals(50, Yatzy.yatzy(new Dice(6, 6, 6, 6, 6)));
-        assertEquals(0, Yatzy.yatzy(new Dice(6, 6, 6, 6, 3)));
+        assertEquals(50, Yatzy.yatzy(new Roll(4, 4, 4, 4, 4)));
+        assertEquals(50, Yatzy.yatzy(new Roll(6, 6, 6, 6, 6)));
+        assertEquals(0, Yatzy.yatzy(new Roll(6, 6, 6, 6, 3)));
     }
 
     @Test
