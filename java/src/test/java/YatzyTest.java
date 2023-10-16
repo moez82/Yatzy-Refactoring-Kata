@@ -12,16 +12,16 @@ public class YatzyTest {
 
     @Test
     public void yatzy() {
+        assertEquals(0, Yatzy.yatzy(new Roll(6, 6, 6, 6, 3)));
         assertEquals(50, Yatzy.yatzy(new Roll(4, 4, 4, 4, 4)));
         assertEquals(50, Yatzy.yatzy(new Roll(6, 6, 6, 6, 6)));
-        assertEquals(0, Yatzy.yatzy(new Roll(6, 6, 6, 6, 3)));
     }
 
     @Test
     public void ones() {
+        assertEquals(0, Yatzy.ones(new Roll(6, 2, 2, 4, 5)));
         assertEquals(1, Yatzy.ones(new Roll(1, 2, 3, 4, 5)));
         assertEquals(2, Yatzy.ones(new Roll(1, 2, 1, 4, 5)));
-        assertEquals(0, Yatzy.ones(new Roll(6, 2, 2, 4, 5)));
         assertEquals(4, Yatzy.ones(new Roll(1, 2, 1, 1, 1)));
     }
 
@@ -39,9 +39,9 @@ public class YatzyTest {
 
     @Test
     public void fours() {
-        assertEquals(12, Yatzy.fours(new Roll(4, 4, 4, 5, 5)));
-        assertEquals(8, Yatzy.fours(new Roll(4, 4, 5, 5, 5)));
         assertEquals(4, Yatzy.fours(new Roll(4, 5, 5, 5, 5)));
+        assertEquals(8, Yatzy.fours(new Roll(4, 4, 5, 5, 5)));
+        assertEquals(12, Yatzy.fours(new Roll(4, 4, 4, 5, 5)));
     }
 
     @Test
@@ -75,9 +75,9 @@ public class YatzyTest {
     public void threeOfAKind() {
         assertEquals(0, Yatzy.threeOfAKind(new Roll(3, 3, 1, 4, 5)));
         assertEquals(9, Yatzy.threeOfAKind(new Roll(3, 3, 3, 4, 5)));
-        assertEquals(15, Yatzy.threeOfAKind(new Roll(5, 3, 5, 4, 5)));
         assertEquals(9, Yatzy.threeOfAKind(new Roll(3, 3, 3, 3, 5)));
         assertEquals(9, Yatzy.threeOfAKind(new Roll(3, 3, 3, 3, 3)));
+        assertEquals(15, Yatzy.threeOfAKind(new Roll(5, 3, 5, 4, 5)));
     }
 
     @Test
@@ -103,7 +103,7 @@ public class YatzyTest {
 
     @Test
     public void fullHouse() {
-        assertEquals(18, Yatzy.fullHouse(6, 2, 2, 2, 6));
-        assertEquals(0, Yatzy.fullHouse(2, 3, 4, 5, 6));
+        assertEquals(0,  Yatzy.fullHouse(new Roll(2, 3, 4, 5, 6)));
+        assertEquals(18, Yatzy.fullHouse(new Roll(6, 2, 2, 2, 6)));
     }
 }
