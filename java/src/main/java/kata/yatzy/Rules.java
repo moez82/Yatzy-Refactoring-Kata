@@ -1,9 +1,11 @@
+package kata.yatzy;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
 
-public class Yatzy {
+public class Rules {
 
     public static final int TOTAL_DICE_NUMBER = 5;
     public static final int SMALL_STRAIGHT_SCORE = 15;
@@ -20,8 +22,8 @@ public class Yatzy {
         return map.values().stream().anyMatch(i -> i == 5) ? YATZY_SCORE : 0;
     }
 
-    private static int sameSideRule(Roll roll, int i) {
-        return roll.occurenceOf(i) * i;
+    private static int sameSideRule(Roll roll, int sideNumber) {
+        return roll.occurenceOf(sideNumber) * sideNumber;
     }
 
     public static int ones(Roll roll) {
