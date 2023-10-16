@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Roll {
 
     private final int[] dice;
@@ -8,6 +10,10 @@ public class Roll {
 
     public int[] dice() {
         return dice;
+    }
+
+    public int occurenceOf(int number) {
+        return (int) Arrays.stream(dice()).filter(i -> i == number).count();
     }
 
 }
