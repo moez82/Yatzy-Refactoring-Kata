@@ -4,6 +4,9 @@ import java.util.Map;
 
 public class Yatzy {
 
+    public static final int TOTAL_DICE_NUMBER = 5;
+    public static final int SMALL_STRAIGHT_SCORE = 15;
+
     public static int chance(Roll roll) {
         return Arrays.stream(roll.dice()).sum();
     }
@@ -84,20 +87,11 @@ public class Yatzy {
             .sum();
     }
 
-    public static int smallStraight(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies;
-        tallies = new int[6];
-        tallies[d1 - 1] += 1;
-        tallies[d2 - 1] += 1;
-        tallies[d3 - 1] += 1;
-        tallies[d4 - 1] += 1;
-        tallies[d5 - 1] += 1;
-        if (tallies[0] == 1 &&
-            tallies[1] == 1 &&
-            tallies[2] == 1 &&
-            tallies[3] == 1 &&
-            tallies[4] == 1)
-            return 15;
+    public static int smallStraight(Roll roll) {
+        if (roll.sidesFrequency().entrySet().size() == TOTAL_DICE_NUMBER &&
+            roll.sidesFrequency().keySet().stream().mapToInt(v -> v).sum() == SMALL_STRAIGHT_SCORE) {
+            return SMALL_STRAIGHT_SCORE;
+        }
         return 0;
     }
 
