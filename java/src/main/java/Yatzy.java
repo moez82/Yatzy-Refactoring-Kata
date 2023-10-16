@@ -1,29 +1,18 @@
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Yatzy {
-
-    protected int[] dice;
-
-    public Yatzy(int d1, int d2, int d3, int d4, int d5) {
-        dice = new int[5];
-        dice[0] = d1;
-        dice[1] = d2;
-        dice[2] = d3;
-        dice[3] = d4;
-        dice[4] = d5;
-    }
 
     public static int chance(Roll roll) {
         return Arrays.stream(roll.dice()).sum();
     }
 
     public static int yatzy(Roll roll) {
-
-        Map<Integer, Long> map = Arrays.stream(roll.dice()).boxed().collect(
-            Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        Map<Integer, Long> map = roll.sidesFrequency();
 
         return map.values().stream().anyMatch(i -> i == 5) ? 50 : 0;
     }
@@ -56,18 +45,14 @@ public class Yatzy {
         return sameSideRule(roll, 6);
     }
 
-    public static int pair(int d1, int d2, int d3, int d4, int d5) {
-        int[] counts = new int[6];
-        counts[d1 - 1]++;
-        counts[d2 - 1]++;
-        counts[d3 - 1]++;
-        counts[d4 - 1]++;
-        counts[d5 - 1]++;
-        int at;
-        for (at = 0; at != 6; at++)
-            if (counts[6 - at - 1] >= 2)
-                return (6 - at) * 2;
-        return 0;
+    public static int pair(Roll roll) {
+
+        Map<Integer, Long> frequency = roll.sidesFrequency();
+
+        return frequency.entrySet().stream()
+            .filter(e -> e.getValue() >= 2)
+            .max(Comparator.comparingInt(Map.Entry::getKey))
+            .map(e -> e.getKey() * 2).orElse(0);
     }
 
     public static int twoPairs(int d1, int d2, int d3, int d4, int d5) {

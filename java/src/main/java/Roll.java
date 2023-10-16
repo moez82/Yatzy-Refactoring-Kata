@@ -1,4 +1,7 @@
 import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Roll {
 
@@ -14,6 +17,11 @@ public class Roll {
 
     public int occurenceOf(int number) {
         return (int) Arrays.stream(dice()).filter(i -> i == number).count();
+    }
+
+    public Map<Integer, Long> sidesFrequency() {
+        return Arrays.stream(dice()).boxed().collect(
+            Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
 }
