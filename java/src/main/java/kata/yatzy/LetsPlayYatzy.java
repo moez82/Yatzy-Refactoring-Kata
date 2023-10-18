@@ -16,7 +16,7 @@ public class LetsPlayYatzy {
 
         Category category = readCategory(in);
 
-        System.out.println("Your roll is : " + Arrays.toString(roll.dice()));
+        System.out.println("Your roll is : " + Arrays.toString(roll.dice().toArray()));
         System.out.println("Your category is : " + category.name());
 
         int score = Category.getCategoryByCode(category.code()).score(roll);

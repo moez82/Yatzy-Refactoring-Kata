@@ -1,6 +1,5 @@
 package kata.yatzy;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
@@ -13,7 +12,7 @@ public class Rules {
     public static final int YATZY_SCORE = 50;
 
     public static int chance(Roll roll) {
-        return Arrays.stream(roll.dice()).sum();
+        return roll.dice().stream().mapToInt(Integer::intValue).sum();
     }
 
     public static int yatzy(Roll roll) {
