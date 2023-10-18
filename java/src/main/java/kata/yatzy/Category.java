@@ -34,7 +34,7 @@ public enum Category {
 
     public static Category getCategoryByCode(int code) {
         for (Category cat: values()) {
-            if (cat.code == code) return cat;
+            if (cat.code() == code) return cat;
         }
 
         System.err.println("Unknown category !");
@@ -47,7 +47,7 @@ public enum Category {
 
     public static void print() {
         for (Category category: values()) {
-            System.out.println("code: " + category.code + " - name : " + category.name());
+            System.out.println("code: " + category.code() + " - name : " + category.name());
         }
     }
 }
